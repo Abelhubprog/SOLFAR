@@ -409,7 +409,7 @@ export default function SolFarcasterPage() {
                   whileHover={{ scale: 1.02, borderColor: "rgba(0, 255, 163, 0.5)" }}
                   transition={{ duration: 0.3 }}
                 >
-                  <h3 className="text-xl font-semibold mb-4 text-teal-400">pump.fun Launch</h3>
+                  <h3 className="text-xl font-semibold mb-4 text-teal-400">pump.fun Trading</h3>
                   <div className="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg flex items-center justify-center">
                     <div className="text-center">
                       <motion.div 
@@ -427,7 +427,7 @@ export default function SolFarcasterPage() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <span>Trade Now</span>
+                        <span>Mint on pump.fun</span>
                         <ExternalLink size={16} />
                       </motion.a>
                     </div>
@@ -458,7 +458,7 @@ export default function SolFarcasterPage() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <span>View Charts</span>
+                        <span>View Live Launch</span>
                         <ExternalLink size={16} />
                       </motion.a>
                     </div>
