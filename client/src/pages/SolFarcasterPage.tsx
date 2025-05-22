@@ -427,7 +427,7 @@ export default function SolFarcasterPage() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <span>BUY $SOLFAR</span>
+                        <span>View on pump.fun</span>
                         <ExternalLink size={16} />
                       </motion.a>
                     </div>
@@ -458,7 +458,7 @@ export default function SolFarcasterPage() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <span>View Dexscreener</span>
+                        <span>View Chart</span>
                         <ExternalLink size={16} />
                       </motion.a>
                     </div>
