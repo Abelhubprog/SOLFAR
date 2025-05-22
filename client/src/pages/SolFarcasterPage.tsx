@@ -251,15 +251,7 @@ export default function SolFarcasterPage() {
             </motion.a>
           </motion.div>
           
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <Button className="btn-secondary px-6 py-2 rounded-xl font-semibold">
-              Connect Wallet
-            </Button>
-          </motion.div>
+          <WalletButton />
         </nav>
       </header>
 
