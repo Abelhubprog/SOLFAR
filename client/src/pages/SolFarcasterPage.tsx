@@ -191,8 +191,8 @@ export default function SolFarcasterPage() {
       <div className="aurora-bg"></div>
 
       {/* Header */}
-      <header className="relative z-50 p-6">
-        <nav className="max-w-7xl mx-auto flex justify-between items-center">
+      <header className="relative z-50 p-4 sm:p-6">
+        <nav className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
           <motion.div 
             className="text-2xl font-bold"
             initial={{ opacity: 0, x: -20 }}
@@ -286,7 +286,7 @@ export default function SolFarcasterPage() {
         
         <motion.p
           variants={itemVariants}
-          className="mt-8 max-w-xl text-lg md:text-xl text-gray-300"
+          className="mt-8 max-w-xl text-base sm:text-lg md:text-xl text-gray-300 px-4"
         >
           <span className="font-semibold text-teal-300">${ticker}</span> is the bridge-native meme token celebrating the eternal arch between&nbsp;
           <span className="font-medium text-teal-400">Solana</span> and&nbsp;
