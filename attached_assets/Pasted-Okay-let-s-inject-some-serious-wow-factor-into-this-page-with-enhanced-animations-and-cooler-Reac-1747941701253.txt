@@ -1,0 +1,515 @@
+Okay, let's inject some serious "wow" factor into this page with enhanced animations and cooler React design elements!
+
+Here's the revamped `SolFarcasterPage.jsx` with a focus on:
+
+1.  **Fluid Animations:** Using Framer Motion extensively for entrance, scroll-triggered, and hover animations.
+2.  **Enhanced Interactivity:** Making elements like the 3D coin and particles more responsive.
+3.  **Modern Aesthetics:** Leveraging gradients, glows, and a consistent visual language.
+4.  **Improved Structure:** Adding a `SectionWrapper` for consistent section animations and a proper footer.
+5.  **Visual Feedback:** Clear hover states and microinteractions.
+
+**First, make sure you have the necessary packages:**
+```bash
+npm i react-tsparticles tsparticles-engine tsparticles-preset-stars @react-three/fiber @react-three/drei three framer-motion lucide-react
+```
+
+Now, here's the updated code:
+
+```jsx
+"use client";
+/**
+ * SolFarcasterPage.jsx – version 4 (Animations & Cool Designs)
+ * ➤ Added Framer Motion for rich animations throughout the page.
+ * ➤ Enhanced 3D coin with hover interactivity.
+ * ➤ Made particle background interactive.
+ * ➤ Implemented scroll-triggered animations for sections and elements.
+ * ➤ Added "How to Join" section with icons and animations.
+ * ➤ Included a stylish footer.
+ * ➤ Enhanced UI elements with gradients, glows, and hover effects.
+ * ➤ Added explicit package install notes in comments:
+ *     npm i react-tsparticles tsparticles-engine tsparticles-preset-stars @react-three/fiber @react-three/drei three framer-motion lucide-react
+ */
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { motion, useAnimation } from "framer-motion";
+import { Suspense, useCallback, useEffect, useState, useRef } from "react";
+
+/* ───────── WOW libs ───────── */
+import Particles from "react-tsparticles";
+import { loadStarsPreset } from "tsparticles-preset-stars";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import { Zap, Gift, Share2, ExternalLink } from "lucide-react"; // Icons
+
+// 🔑 Replace with the real pump.fun embed URL once your token is live
+const PUMP_FUN_WIDGET_URL = "https://pump.fun/"; // e.g., "https://pump.fun/YOUR_TOKEN_MINT_ADDRESS"
+
+/* 3D rotating Solana coin with hover effects */
+function RotatingCoin({ isHovered }) {
+  const meshRef = useRef();
+  useFrame((state, delta) => {
+    // Optional: Add a slight wobble or other continuous subtle animation
+    // meshRef.current.rotation.z += delta * 0.1;
+  });
+
+  return (
+    <mesh ref={meshRef} rotation={[Math.PI / 2, 0, 0]}> {/* rotate so coin faces camera */}
+      <cylinderGeometry args={[1, 1, 0.06, 64]} /> {/* Thinner coin for sleeker look */}
+      <motion.meshStandardMaterial
+        color="#00FFA3"
+        emissive={isHovered ? "#B57AFF" : "#9945FF"} // Brighter violet emissive on hover
+        emissiveIntensity={isHovered ? 1.8 : 1.2}
+        metalness={0.9} // More metallic
+        roughness={0.1}  // Shinier
+        animate={{
+          emissiveIntensity: isHovered ? 1.8 : 1.2,
+          roughness: isHovered ? 0.05 : 0.1,
+        }}
+        transition={{ duration: 0.3 }}
+      />
+    </mesh>
+  );
+}
+
+// Wrapper for consistent section animations
+const SectionWrapper = ({ children, className = "", delay = 0, yOffset = 50 }) => (
+  <motion.section
+    initial={{ opacity: 0, y: yOffset }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.2 }}
+    transition={{ duration: 0.8, delay, ease: "easeOut" }}
+    className={className}
+  >
+    {children}
+  </motion.section>
+);
+
+// Animated Card Component
+const MotionCard = motion(Card);
+
+export default function SolFarcasterPage() {
+  const ticker = "SOLFAR";
+  const [price, setPrice] = useState("--");
+  const [supply, setSupply] = useState("--");
+  const [isCoinHovered, setIsCoinHovered] = useState(false);
+
+  const particlesInit = useCallback(async (engine) => {
+    await loadStarsPreset(engine);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setPrice((Math.random() * 0.01 + 0.0001).toFixed(4));
+      setSupply(Math.floor(Math.random() * 1000000 + 500000).toLocaleString());
+    }, 3500); // slightly slower for more noticeable animation
+    return () => clearInterval(id);
+  }, []);
+
+  const heroVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  };
+
+  const howToSteps = [
+    {
+      step: 1,
+      title: "Mint on pump.fun",
+      desc: "Acquire $SOLFAR tokens directly via the official pump.fun launch. Be early!",
+      icon: <Zap size={32} className="text-teal-400 group-hover:text-teal-300 transition-colors" />,
+      link: PUMP_FUN_WIDGET_URL,
+      linkText: "Go to pump.fun"
+    },
+    {
+      step: 2,
+      title: "Hold & Be Rewarded",
+      desc: "Become part of the community. Future airdrops, utilities, and surprises await holders.",
+      icon: <Gift size={32} className="text-fuchsia-500 group-hover:text-fuchsia-400 transition-colors" />,
+    },
+    {
+      step: 3,
+      title: "Bridge Worlds",
+      desc: "Champion the symbiotic link between Solana's speed and Farcaster's social fabric.",
+      icon: <Share2 size={32} className="text-violet-400 group-hover:text-violet-300 transition-colors" />,
+    },
+  ];
+
+  return (
+    <div className="relative min-h-screen overflow-x-hidden bg-black text-white font-sans">
+      {/* ───────── Starfield BG (Interactive) ───────── */}
+      <Particles
+        id="starfield"
+        className="fixed inset-0 -z-20"
+        init={particlesInit}
+        options={{
+          preset: "stars",
+          background: { color: "#000000" },
+          particles: {
+            move: {
+              speed: 0.3, // Slower, more majestic stars
+            },
+            size: {
+              value: { min: 0.5, max: 1.5 } // Slightly larger stars
+            }
+          },
+          interactivity: {
+            events: {
+              onHover: {
+                enable: true,
+                mode: "repulse",
+              },
+            },
+            modes: {
+              repulse: {
+                distance: 80,
+                duration: 0.4,
+                speed: 0.5
+              },
+            },
+          },
+        }}
+      />
+      
+      {/* Invisible divs for aurora effect - more subtle than a full BG image */}
+      <div className="fixed -top-1/2 -left-1/2 w-[200vw] h-[200vh] -z-10">
+        <div className="absolute inset-0 animate-[spin_40s_linear_infinite]">
+          <div className="absolute w-96 h-96 md:w-[40rem] md:h-[40rem] bg-gradient-radial from-teal-500/30 to-transparent rounded-full blur-3xl" style={{top: '20%', left: '30%'}}></div>
+          <div className="absolute w-96 h-96 md:w-[40rem] md:h-[40rem] bg-gradient-radial from-fuchsia-500/30 to-transparent rounded-full blur-3xl" style={{bottom: '20%', right: '30%'}}></div>
+          <div className="absolute w-80 h-80 md:w-[30rem] md:h-[30rem] bg-gradient-radial from-violet-600/20 to-transparent rounded-full blur-3xl" style={{top: '40%', right: '15%'}}></div>
+        </div>
+      </div>
+
+
+      {/* ───────────── Hero ───────────── */}
+      <motion.section
+        className="relative flex flex-col items-center justify-center px-4 py-28 text-center min-h-screen"
+        variants={heroVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.h1
+          variants={itemVariants}
+          className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter" // Tighter tracking
+        >
+          Welcome&nbsp;
+          <motion.span
+            className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-green-400"
+            whileHover={{ letterSpacing: "0.05em" }}
+            transition={{ duration: 0.3 }}
+          >
+            Solana
+          </motion.span>
+          &nbsp;to&nbsp;
+          <motion.span
+            className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-500"
+            whileHover={{ letterSpacing: "0.05em" }}
+            transition={{ duration: 0.3 }}
+          >
+            Farcaster
+          </motion.span>
+        </motion.h1>
+        <motion.p
+          variants={itemVariants}
+          className="mt-8 max-w-xl text-lg md:text-xl text-gray-300"
+        >
+          <span className="font-semibold text-teal-300">${ticker}</span> is the bridge-native meme token celebrating the eternal arch between&nbsp;
+          <span className="font-medium text-teal-400">Solana</span> and&nbsp;
+          <span className="font-medium text-violet-400">Farcaster</span>. Join the movement.
+        </motion.p>
+
+        {/* ───────── 3D Coin ───────── */}
+        <motion.div
+          variants={itemVariants}
+          className="mt-12 w-48 h-48 md:w-64 md:h-64 cursor-grab" // Smaller, more refined
+          onMouseEnter={() => setIsCoinHovered(true)}
+          onMouseLeave={() => setIsCoinHovered(false)}
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
+          <Suspense fallback={<div className="w-full h-full flex items-center justify-center text-gray-500">Loading Coin...</div>}>
+            <Canvas camera={{ position: [0, 0, 3], fov: 50 }}> {/* Slightly different camera */}
+              <ambientLight intensity={isCoinHovered ? 0.9 : 0.6} />
+              <directionalLight position={[3, 3, 3]} intensity={isCoinHovered ? 1.8 : 1.2} />
+              <pointLight position={[-3, -3, 2]} intensity={isCoinHovered ? 1.0 : 0.5} color="#00FFA3" />
+              <RotatingCoin isHovered={isCoinHovered} />
+              <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={isCoinHovered ? 6 : 2.5} enablePan={false} />
+            </Canvas>
+          </Suspense>
+        </motion.div>
+
+        <motion.div
+          variants={itemVariants}
+          className="mt-12 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 sm:gap-6"
+        >
+          <Button
+            asChild
+            size="lg"
+            className="rounded-xl px-8 py-3 text-base md:text-lg font-semibold text-white shadow-lg shadow-fuchsia-500/30
+                       bg-gradient-to-r from-teal-500 via-green-500 to-emerald-600
+                       hover:from-teal-600 hover:via-green-600 hover:to-emerald-700
+                       focus:ring-4 focus:ring-teal-500/50 transition-all duration-300"
+          >
+            <motion.a
+              href="#launch-panel" // Scroll to launch panel
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              View Live Launch
+            </motion.a>
+          </Button>
+          <Button
+            asChild
+            variant="outline" // More distinct secondary
+            size="lg"
+            className="rounded-xl px-8 py-3 text-base md:text-lg font-semibold
+                       border-violet-500 text-violet-300 hover:bg-violet-500/20 hover:text-violet-200
+                       focus:ring-4 focus:ring-violet-500/50 transition-all duration-300 group"
+          >
+            <motion.a
+              href={PUMP_FUN_WIDGET_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Mint on pump.fun <ExternalLink size={18} className="ml-2 inline-block group-hover:translate-x-1 transition-transform" />
+            </motion.a>
+          </Button>
+        </motion.div>
+      </motion.section>
+
+      {/* ─────────── Live Launch Panel ─────────── */}
+      <SectionWrapper className="px-4 py-16 md:py-24" id="launch-panel">
+        <MotionCard
+          className="mx-auto max-w-5xl bg-black/70 backdrop-blur-xl border-2 border-violet-700/60 shadow-2xl shadow-violet-500/20"
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <CardHeader className="pb-4">
+            <CardTitle className="text-3xl md:text-4xl font-bold text-center">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-green-400 to-emerald-500">Live</span> Launch:&nbsp;
+              <span className="text-violet-300">${ticker}</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-2">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <motion.div 
+                className="w-full aspect-[16/10] rounded-xl overflow-hidden border border-violet-800/50 shadow-lg"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                {PUMP_FUN_WIDGET_URL !== "https://pump.fun/" ? (
+                   <iframe src={PUMP_FUN_WIDGET_URL} className="w-full h-full border-0" title="pump.fun widget" loading="lazy" />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center bg-black/50 p-8 text-center">
+                    <Zap size={48} className="text-teal-500 mb-4" />
+                    <h3 className="text-xl font-semibold mb-2">Pump.fun Widget Will Appear Here</h3>
+                    <p className="text-gray-400">Once the token is live, this area will display the interactive pump.fun interface.</p>
+                  </div>
+                )}
+              </motion.div>
+              <motion.div 
+                className="flex flex-col justify-center"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <h3 className="text-2xl font-semibold mb-6 text-gray-100">Real-time Curve Stats</h3>
+                <ul className="space-y-4 text-lg">
+                  {[
+                    { label: "Current Price (USD)", value: `$${price}`, highlight: "text-teal-400" },
+                    { label: "Circulating Supply", value: supply, highlight: "text-fuchsia-400" },
+                    { label: "Next Airdrop Snapshot", value: "14h 26m", highlight: "text-violet-400" },
+                  ].map(item => (
+                    <li key={item.label} className="flex items-center justify-between pb-2 border-b border-gray-700/50">
+                      <span className="text-gray-400">{item.label}</span>
+                      <motion.span key={item.value} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} className={`font-mono font-semibold ${item.highlight}`}>
+                        {item.value}
+                      </motion.span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </div>
+          </CardContent>
+        </MotionCard>
+      </SectionWrapper>
+
+      {/* ─────────── Tokenomics ─────────── */}
+      <SectionWrapper className="px-4 py-16 md:py-24 bg-gradient-to-b from-black via-violet-950/30 to-black">
+        <h2 className="text-center text-4xl md:text-5xl font-extrabold mb-16 tracking-tight">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-fuchsia-500">Token</span>omics
+        </h2>
+        <motion.div 
+          className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ staggerChildren: 0.2 }}
+        >
+          {[
+            { label: "Community First", percent: "92%", color: "from-teal-500/80", textColor: "text-teal-300" },
+            { label: "LP Secured", percent: "5%", color: "from-fuchsia-500/80", textColor: "text-fuchsia-300" },
+            { label: "Ecosystem Fund", percent: "3%", color: "from-indigo-500/80", textColor: "text-indigo-300" },
+          ].map(({ label, percent, color, textColor }) => (
+            <MotionCard
+              key={label}
+              className="bg-black/70 backdrop-blur-md border border-violet-700/40 rounded-2xl shadow-xl overflow-hidden group"
+              variants={itemVariants} // Use itemVariants for staggered children
+              whileHover={{ y: -8, boxShadow: "0 10px 20px rgba(171, 71, 188, 0.3)" }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <CardHeader className="pb-2">
+                <CardTitle className={`text-2xl font-semibold ${textColor} group-hover:brightness-125 transition-all`}>{label}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-col items-center pt-2 pb-4">
+                  <motion.div
+                    className={`w-36 h-36 rounded-full bg-gradient-to-br ${color} to-black/50 flex items-center justify-center text-4xl font-bold text-white shadow-lg group-hover:scale-105 transition-transform duration-300`}
+                    animate={{ rotate: [0, 5, -5, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: Math.random() * 1 }}
+                  >
+                    {percent}
+                  </motion.div>
+                </div>
+              </CardContent>
+            </MotionCard>
+          ))}
+        </motion.div>
+      </SectionWrapper>
+
+      {/* ─────────── How it works ─────────── */}
+      <SectionWrapper className="px-4 py-16 md:py-24">
+        <h2 className="text-center text-4xl md:text-5xl font-extrabold mb-16 tracking-tight">
+          How to <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-violet-500 to-fuchsia-500">Join the Arch</span>
+        </h2>
+        <motion.div 
+          className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }} // Trigger when 10% of the grid is visible
+          transition={{ staggerChildren: 0.25, delayChildren: 0.1 }} // Stagger children animation
+        >
+          {howToSteps.map((item) => (
+            <MotionCard
+              key={item.step}
+              className="bg-black/70 backdrop-blur-md border border-violet-700/40 rounded-2xl shadow-xl p-6 group flex flex-col text-center items-center"
+              variants={itemVariants} // Individual card animation variant
+              whileHover={{ y: -10, scale:1.03, boxShadow: "0 10px 25px rgba(124, 58, 237, 0.4)" }} // Violet glow from violet-600
+              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            >
+              <motion.div 
+                className="p-4 bg-gradient-to-br from-gray-800 to-black rounded-full mb-6 shadow-md group-hover:scale-110 transition-transform"
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.8, ease: "circOut" }}
+              >
+                {item.icon}
+              </motion.div>
+              <CardTitle className="text-2xl font-semibold mb-3 text-gray-100 group-hover:text-white transition-colors">{item.title}</CardTitle>
+              <p className="text-gray-400 flex-grow group-hover:text-gray-300 transition-colors">{item.desc}</p>
+              {item.link && (
+                 <Button 
+                    asChild 
+                    variant="link" 
+                    className="mt-6 text-teal-400 hover:text-teal-300 font-semibold group/link"
+                  >
+                   <motion.a 
+                    href={item.link} 
+                    target="_blank" rel="noopener noreferrer"
+                    whileHover={{ letterSpacing: "0.02em" }}
+                    >
+                     {item.linkText} <ExternalLink size={16} className="ml-1.5 inline-block group-hover/link:translate-x-0.5 transition-transform" />
+                   </motion.a>
+                 </Button>
+              )}
+            </MotionCard>
+          ))}
+        </motion.div>
+      </SectionWrapper>
+      
+      {/* ─────────── Footer ─────────── */}
+      <motion.footer 
+        className="py-12 px-4 text-center text-gray-500 border-t border-gray-800/50 mt-16"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, delay: 0.3 }}
+      >
+        <p className="mb-2">
+          © {new Date().getFullYear()} {ticker}. Bridging Solana & Farcaster.
+        </p>
+        <p className="text-xs mb-6">This token is for entertainment purposes. Not financial advice. DYOR.</p>
+        <div className="flex justify-center space-x-6">
+          {['Twitter', 'Telegram', 'Discord'].map((social) => (
+            <motion.a 
+              key={social} 
+              href="#" 
+              className="hover:text-teal-400 transition-colors duration-300"
+              whileHover={{ y: -3, color: social === 'Twitter' ? '#1DA1F2' : social === 'Telegram' ? '#0088cc' : '#7289DA' }}
+              whileTap={{ scale: 0.9 }}
+            >
+              {social}
+            </motion.a>
+          ))}
+        </div>
+      </motion.footer>
+    </div>
+  );
+}
+
+// Add to tailwind.config.js if you don't have it for the aurora effect:
+// theme: {
+//   extend: {
+//     backgroundImage: {
+//       'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+//     },
+//     animation: {
+//       'spin-slow': 'spin 6s linear infinite', // Used for the glow card example (not directly in this final code, but good to have)
+//     },
+//   },
+// },
+```
+
+**Key Changes and "Cool" Factors:**
+
+1.  **Aurora Background Blobs:** Subtle, animated radial gradients in the background give a sense of depth and color without being overwhelming. They are fixed and spin slowly behind the content.
+2.  **Interactive Starfield:** Particles now react to mouse hover (`repulse` mode).
+3.  **Enhanced Hero Section:**
+    *   Staggered animation for heading and paragraph.
+    *   Gradient text with hover effect (letter spacing).
+    *   3D coin is smaller, more refined, with better lighting and material response on hover. The `OrbitControls` also speed up on hover.
+    *   Buttons are styled with gradients and prominent hover/tap effects using Framer Motion. "View Live Launch" now scrolls to the relevant section.
+4.  **Section Wrapper:** The `SectionWrapper` component provides consistent scroll-into-view animations for major page sections.
+5.  **Animated Cards:**
+    *   `MotionCard` (which is `motion(Card)`) is used for smooth animations.
+    *   Live Launch Panel card has a more distinct appearance and its content animates in.
+    *   Tokenomics cards have subtle hover effects (lift, shadow) and their percentage circles have a gentle rotation animation.
+    *   "How to Join" cards use icons, have a more interactive hover (lift, scale, glow), and the icon itself can have micro-animations.
+6.  **Live Data Animation:** Price and supply numbers now fade in smoothly on update using `motion.span` with a `key` prop.
+7.  **Gradient Usage:** More prominent use of gradients for text, buttons, and decorative elements to create a vibrant, modern feel.
+8.  **Icons:** `lucide-react` icons add visual cues and polish.
+9.  **Refined Typography & Spacing:** Adjustments to tracking, font weights, and spacing for a cleaner look.
+10. **Footer:** A proper animated footer with social links.
+11. **Placeholder for Pump.fun Widget:** Shows a message if the `PUMP_FUN_WIDGET_URL` is still the default, improving UX.
+12. **Performance Considerations:**
+    *   `viewport={{ once: true }}` ensures animations trigger only once.
+    *   `Suspense` for the 3D coin prevents blocking.
+    *   `loading="lazy"` for the iframe.
+
+This version should give you a significantly more dynamic, engaging, and visually "cool" page! Remember to adjust colors, animation timings, and specific effects to perfectly match your brand's vision.
