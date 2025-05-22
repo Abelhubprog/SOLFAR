@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Zap, Gift, Share2, ExternalLink, TrendingUp, BarChart3, Coins, Users, Lock, Twitter, MessageCircle, Github, Star, Rocket, Globe, Send } from "lucide-react";
 import { formatNumber, formatPrice, formatCurrency } from "@/lib/utils";
+import { WalletButton } from "@/components/WalletButton";
 
 // Replace with the real pump.fun embed URL once your token is live
 const PUMP_FUN_WIDGET_URL = "https://pump.fun/";
