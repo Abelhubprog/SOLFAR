@@ -419,8 +419,17 @@ export default function SolFarcasterPage() {
                       >
                         <TrendingUp className="w-8 h-8 text-black" />
                       </motion.div>
-                      <p className="text-gray-400">pump.fun Widget</p>
-                      <p className="text-sm text-teal-400 mt-2">Live trading coming soon!</p>
+                      <motion.a
+                        href="https://pump.fun/coin/4AVHBUF2gPSj32WrxitjvuUJFx2Xt27DegkYtWbvpump"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center space-x-2 px-6 py-3 bg-teal-500 hover:bg-teal-400 rounded-lg text-black font-semibold transition-all mt-2"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <span>Trade Now</span>
+                        <ExternalLink size={16} />
+                      </motion.a>
                     </div>
                   </div>
                 </motion.div>
@@ -441,8 +450,17 @@ export default function SolFarcasterPage() {
                       >
                         <BarChart3 className="w-8 h-8 text-white" />
                       </motion.div>
-                      <p className="text-gray-400">Dexscreener Chart</p>
-                      <p className="text-sm text-violet-400 mt-2">Charts ready for launch!</p>
+                      <motion.a
+                        href="https://dexscreener.com/solana/4AVHBUF2gPSj32WrxitjvuUJFx2Xt27DegkYtWbvpump"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center space-x-2 px-6 py-3 bg-violet-500 hover:bg-violet-400 rounded-lg text-white font-semibold transition-all mt-2"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <span>View Charts</span>
+                        <ExternalLink size={16} />
+                      </motion.a>
                     </div>
                   </div>
                 </motion.div>
