@@ -458,7 +458,7 @@ export default function SolFarcasterPage() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <span>View Chart</span>
+                        <span>View Live Chart</span>
                         <ExternalLink size={16} />
                       </motion.a>
                     </div>
