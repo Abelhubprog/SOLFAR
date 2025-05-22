@@ -264,7 +264,7 @@ export default function SolFarcasterPage() {
       >
         <motion.h1
           variants={itemVariants}
-          className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter"
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter px-4"
         >
           Welcome&nbsp;
           <motion.span
@@ -344,12 +344,12 @@ export default function SolFarcasterPage() {
           className="mt-16 text-center"
         >
           <p className="text-gray-400 mb-6">Join our growing community</p>
-          <div className="flex justify-center space-x-6">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 max-w-4xl mx-auto">
             <motion.a
               href="https://twitter.com/solfarcaster"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 px-6 py-3 bg-gray-900 rounded-xl border border-gray-700 hover:border-blue-500 transition-all group"
+              className="flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 bg-gray-900 rounded-xl border border-gray-700 hover:border-blue-500 transition-all group w-full sm:w-auto"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -361,7 +361,7 @@ export default function SolFarcasterPage() {
               href="https://t.me/solfarcaster"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 px-6 py-3 bg-gray-900 rounded-xl border border-gray-700 hover:border-blue-400 transition-all group"
+              className="flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 bg-gray-900 rounded-xl border border-gray-700 hover:border-blue-400 transition-all group w-full sm:w-auto"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -373,7 +373,7 @@ export default function SolFarcasterPage() {
               href="https://warpcast.com/solana"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 px-6 py-3 bg-gray-900 rounded-xl border border-gray-700 hover:border-purple-500 transition-all group"
+              className="flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 bg-gray-900 rounded-xl border border-gray-700 hover:border-purple-500 transition-all group w-full sm:w-auto"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
