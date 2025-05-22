@@ -312,13 +312,13 @@ export default function SolFarcasterPage() {
           <Button
             size="lg"
             className="btn-primary rounded-xl px-8 py-3 text-base md:text-lg font-semibold"
-            onClick={() => document.getElementById('launch')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => window.open('https://dexscreener.com/solana/4AVHBUF2gPSj32WrxitjvuUJFx2Xt27DegkYtWbvpump', '_blank')}
           >
             <motion.span
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
-              View Live Launch
+              View Live Chart
             </motion.span>
           </Button>
           
