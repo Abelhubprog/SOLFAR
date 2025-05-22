@@ -333,7 +333,7 @@ export default function SolFarcasterPage() {
               whileTap={{ scale: 0.95 }}
               className="flex items-center"
             >
-              Mint on pump.fun <ExternalLink size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+              View on pump.fun <ExternalLink size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
             </motion.span>
           </Button>
         </motion.div>
