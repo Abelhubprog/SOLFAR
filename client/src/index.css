@@ -1,0 +1,241 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --background: 0 0% 0%; /* #000000 */
+  --foreground: 0 0% 100%; /* #FFFFFF */
+  --muted: 240 3.7% 15.9%; /* #27272A */
+  --muted-foreground: 240 5% 64.9%; /* #A1A1AA */
+  --popover: 0 0% 0%; /* #000000 */
+  --popover-foreground: 0 0% 100%; /* #FFFFFF */
+  --card: 0 0% 0%; /* #000000 */
+  --card-foreground: 0 0% 100%; /* #FFFFFF */
+  --border: 240 3.7% 15.9%; /* #27272A */
+  --input: 240 3.7% 15.9%; /* #27272A */
+  --primary: 162 100% 50%; /* #00FFA3 */
+  --primary-foreground: 0 0% 0%; /* #000000 */
+  --secondary: 240 3.7% 15.9%; /* #27272A */
+  --secondary-foreground: 0 0% 100%; /* #FFFFFF */
+  --accent: 240 3.7% 15.9%; /* #27272A */
+  --accent-foreground: 0 0% 100%; /* #FFFFFF */
+  --destructive: 0 84.2% 60.2%; /* #EF4444 */
+  --destructive-foreground: 60 9.1% 97.8%; /* #FAFAFA */
+  --ring: 240 4.9% 83.9%; /* #D4D4D8 */
+  --radius: 0.5rem;
+  
+  /* Custom colors for Sol-Farcaster theme */
+  --solana-green: 162 100% 50%; /* #00FFA3 */
+  --farcaster-purple: 260 100% 65%; /* #9945FF */
+  --sol-teal: 172 85% 39%; /* #14B8A6 */
+  --far-violet: 258 90% 66%; /* #8B5CF6 */
+}
+
+.dark {
+  --background: 0 0% 0%; /* #000000 */
+  --foreground: 0 0% 100%; /* #FFFFFF */
+  --muted: 240 3.7% 15.9%; /* #27272A */
+  --muted-foreground: 240 5% 64.9%; /* #A1A1AA */
+  --popover: 0 0% 0%; /* #000000 */
+  --popover-foreground: 0 0% 100%; /* #FFFFFF */
+  --card: 0 0% 0%; /* #000000 */
+  --card-foreground: 0 0% 100%; /* #FFFFFF */
+  --border: 240 3.7% 15.9%; /* #27272A */
+  --input: 240 3.7% 15.9%; /* #27272A */
+  --primary: 162 100% 50%; /* #00FFA3 */
+  --primary-foreground: 0 0% 0%; /* #000000 */
+  --secondary: 240 3.7% 15.9%; /* #27272A */
+  --secondary-foreground: 0 0% 100%; /* #FFFFFF */
+  --accent: 240 3.7% 15.9%; /* #27272A */
+  --accent-foreground: 0 0% 100%; /* #FFFFFF */
+  --destructive: 0 62.8% 30.6%; /* #DC2626 */
+  --destructive-foreground: 0 0% 100%; /* #FFFFFF */
+  --ring: 240 4.9% 83.9%; /* #D4D4D8 */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(var(--solana-green)), hsl(var(--sol-teal)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gradient-text-purple {
+    background: linear-gradient(135deg, hsl(var(--farcaster-purple)), hsl(var(--far-violet)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .bg-gradient-radial {
+    background-image: radial-gradient(var(--tw-gradient-stops));
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 20px rgba(0, 255, 163, 0.3); }
+  100% { box-shadow: 0 0 40px rgba(0, 255, 163, 0.6); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* Card effects */
+.card-glow {
+  box-shadow: 0 0 40px rgba(153, 69, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.card-glow:hover {
+  box-shadow: 0 0 60px rgba(153, 69, 255, 0.25);
+  transform: translateY(-5px);
+}
+
+/* Three.js coin container */
+.coin-container {
+  perspective: 1000px;
+}
+
+/* Trading widget styles */
+.trading-widget {
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(153, 69, 255, 0.4);
+}
+
+.stats-card {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(153, 69, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+  border-color: rgba(153, 69, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+.step-card {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.step-card:hover {
+  background: rgba(0, 0, 0, 0.9);
+  border-color: rgba(0, 255, 163, 0.5);
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Button styles */
+.btn-primary {
+  background: linear-gradient(135deg, hsl(var(--solana-green)), hsl(var(--sol-teal)));
+  transition: all 0.3s ease;
+  color: black;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, hsl(var(--sol-teal)), hsl(var(--solana-green)));
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 255, 163, 0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid hsl(var(--farcaster-purple));
+  color: hsl(var(--farcaster-purple));
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.btn-secondary:hover {
+  background: hsl(var(--farcaster-purple));
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(153, 69, 255, 0.3);
+}
+
+/* Particles container */
+#tsparticles {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -10;
+}
+
+/* Price ticker animation */
+.price-ticker {
+  animation: pulse-slow infinite;
+}
+
+/* Aurora background effect */
+.aurora-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 20% 80%, rgba(0, 255, 163, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(153, 69, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 40%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+  animation: spin-slow infinite;
+  pointer-events: none;
+  z-index: -1;
+}
