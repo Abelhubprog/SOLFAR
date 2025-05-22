@@ -240,7 +240,7 @@ export default function SolFarcasterPage() {
               <Send size={16} />
             </motion.a>
             <motion.a
-              href="https://warpcast.com/~/channel/solfarcaster"
+              href="https://warpcast.com/solana"
               target="_blank"
               rel="noopener noreferrer"
               className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-500 transition-colors"
@@ -370,7 +370,7 @@ export default function SolFarcasterPage() {
             </motion.a>
             
             <motion.a
-              href="https://warpcast.com/~/channel/solfarcaster"
+              href="https://warpcast.com/solana"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center space-x-2 px-6 py-3 bg-gray-900 rounded-xl border border-gray-700 hover:border-purple-500 transition-all group"
@@ -702,7 +702,7 @@ export default function SolFarcasterPage() {
               <p className="text-gray-400 mb-6">Connect on the decentralized social network that inspired our mission</p>
               <Button
                 className="w-full bg-purple-500 hover:bg-purple-600 text-white border-0"
-                onClick={() => window.open('https://warpcast.com/~/channel/solfarcaster', '_blank')}
+                onClick={() => window.open('https://warpcast.com/solana', '_blank')}
               >
                 Join on Warpcast
               </Button>
@@ -752,7 +752,7 @@ export default function SolFarcasterPage() {
                   <Send size={20} className="group-hover:text-white transition-colors" />
                 </motion.a>
                 <motion.a
-                  href="https://warpcast.com/~/channel/solfarcaster"
+                  href="https://warpcast.com/solana"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-500 transition-colors group"
