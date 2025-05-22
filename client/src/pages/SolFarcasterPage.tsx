@@ -427,7 +427,7 @@ export default function SolFarcasterPage() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <span>Mint on pump.fun</span>
+                        <span>Trade on pump.fun</span>
                         <ExternalLink size={16} />
                       </motion.a>
                     </div>
