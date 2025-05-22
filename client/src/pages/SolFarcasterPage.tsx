@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Zap, Gift, Share2, ExternalLink, TrendingUp, BarChart3, Coins, Users, Lock, Twitter, MessageCircle, Github, Star, Rocket, Globe } from "lucide-react";
+import { Zap, Gift, Share2, ExternalLink, TrendingUp, BarChart3, Coins, Users, Lock, Twitter, MessageCircle, Github, Star, Rocket, Globe, Send } from "lucide-react";
 import { formatNumber, formatPrice, formatCurrency } from "@/lib/utils";
 
 // Replace with the real pump.fun embed URL once your token is live
@@ -210,6 +210,46 @@ export default function SolFarcasterPage() {
             <a href="#tokenomics" className="hover:text-teal-400 transition-colors">Tokenomics</a>
             <a href="#how-to-join" className="hover:text-teal-400 transition-colors">How to Join</a>
           </motion.div>
+          
+          {/* Social Links in Header */}
+          <motion.div 
+            className="hidden lg:flex items-center space-x-4"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+          >
+            <motion.a
+              href="https://twitter.com/solfarcaster"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Twitter size={16} />
+            </motion.a>
+            <motion.a
+              href="https://t.me/solfarcaster"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Send size={16} />
+            </motion.a>
+            <motion.a
+              href="https://warpcast.com/~/channel/solfarcaster"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-500 transition-colors"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <MessageCircle size={16} />
+            </motion.a>
+          </motion.div>
+          
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -303,6 +343,51 @@ export default function SolFarcasterPage() {
               Mint on pump.fun <ExternalLink size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
             </motion.span>
           </Button>
+        </motion.div>
+
+        {/* Social Media Call-to-Action */}
+        <motion.div
+          variants={itemVariants}
+          className="mt-16 text-center"
+        >
+          <p className="text-gray-400 mb-6">Join our growing community</p>
+          <div className="flex justify-center space-x-6">
+            <motion.a
+              href="https://twitter.com/solfarcaster"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-2 px-6 py-3 bg-gray-900 rounded-xl border border-gray-700 hover:border-blue-500 transition-all group"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Twitter size={20} className="text-blue-400 group-hover:text-blue-300" />
+              <span className="text-gray-300 group-hover:text-white">Follow on X</span>
+            </motion.a>
+            
+            <motion.a
+              href="https://t.me/solfarcaster"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-2 px-6 py-3 bg-gray-900 rounded-xl border border-gray-700 hover:border-blue-400 transition-all group"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Send size={20} className="text-blue-400 group-hover:text-blue-300" />
+              <span className="text-gray-300 group-hover:text-white">Join Telegram</span>
+            </motion.a>
+            
+            <motion.a
+              href="https://warpcast.com/~/channel/solfarcaster"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-2 px-6 py-3 bg-gray-900 rounded-xl border border-gray-700 hover:border-purple-500 transition-all group"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <MessageCircle size={20} className="text-purple-400 group-hover:text-purple-300" />
+              <span className="text-gray-300 group-hover:text-white">Join Farcaster</span>
+            </motion.a>
+          </div>
         </motion.div>
       </motion.section>
 
@@ -534,6 +619,105 @@ export default function SolFarcasterPage() {
         </div>
       </SectionWrapper>
 
+      {/* Community Section */}
+      <SectionWrapper className="py-20 px-4 bg-gradient-to-b from-black to-gray-900">
+        <div className="max-w-6xl mx-auto text-center">
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            Join the <span className="gradient-text">SOLFAR</span> Community
+          </motion.h2>
+          <motion.p 
+            className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Connect with fellow bridge builders across all platforms. Stay updated, share ideas, and be part of the revolution.
+          </motion.p>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <motion.div
+              className="bg-gradient-to-br from-blue-900/20 to-blue-800/20 rounded-2xl p-8 border border-blue-500/20 hover:border-blue-400/40 transition-all group"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              whileHover={{ y: -5, scale: 1.02 }}
+            >
+              <motion.div 
+                className="w-20 h-20 mx-auto mb-6 bg-blue-500 rounded-full flex items-center justify-center"
+                whileHover={{ rotate: 5, scale: 1.1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Twitter size={32} className="text-white" />
+              </motion.div>
+              <h3 className="text-2xl font-bold mb-4 text-blue-400">X (Twitter)</h3>
+              <p className="text-gray-400 mb-6">Follow for real-time updates, announcements, and community highlights</p>
+              <Button
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white border-0"
+                onClick={() => window.open('https://twitter.com/solfarcaster', '_blank')}
+              >
+                Follow @solfarcaster
+              </Button>
+            </motion.div>
+            
+            <motion.div
+              className="bg-gradient-to-br from-blue-600/20 to-cyan-500/20 rounded-2xl p-8 border border-cyan-500/20 hover:border-cyan-400/40 transition-all group"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ y: -5, scale: 1.02 }}
+            >
+              <motion.div 
+                className="w-20 h-20 mx-auto mb-6 bg-cyan-500 rounded-full flex items-center justify-center"
+                whileHover={{ rotate: 5, scale: 1.1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Send size={32} className="text-white" />
+              </motion.div>
+              <h3 className="text-2xl font-bold mb-4 text-cyan-400">Telegram</h3>
+              <p className="text-gray-400 mb-6">Join our active chat for discussions, alpha, and community support</p>
+              <Button
+                className="w-full bg-cyan-500 hover:bg-cyan-600 text-white border-0"
+                onClick={() => window.open('https://t.me/solfarcaster', '_blank')}
+              >
+                Join Channel
+              </Button>
+            </motion.div>
+            
+            <motion.div
+              className="bg-gradient-to-br from-purple-900/20 to-fuchsia-800/20 rounded-2xl p-8 border border-purple-500/20 hover:border-purple-400/40 transition-all group"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              whileHover={{ y: -5, scale: 1.02 }}
+            >
+              <motion.div 
+                className="w-20 h-20 mx-auto mb-6 bg-purple-500 rounded-full flex items-center justify-center"
+                whileHover={{ rotate: 5, scale: 1.1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <MessageCircle size={32} className="text-white" />
+              </motion.div>
+              <h3 className="text-2xl font-bold mb-4 text-purple-400">Farcaster</h3>
+              <p className="text-gray-400 mb-6">Connect on the decentralized social network that inspired our mission</p>
+              <Button
+                className="w-full bg-purple-500 hover:bg-purple-600 text-white border-0"
+                onClick={() => window.open('https://warpcast.com/~/channel/solfarcaster', '_blank')}
+              >
+                Join on Warpcast
+              </Button>
+            </motion.div>
+          </div>
+        </div>
+      </SectionWrapper>
+
       {/* Footer */}
       <footer className="relative py-16 px-4 border-t border-gray-800">
         <div className="max-w-6xl mx-auto">
@@ -553,28 +737,37 @@ export default function SolFarcasterPage() {
               </p>
               <div className="flex space-x-4">
                 <motion.a
-                  href="#"
-                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-teal-500 transition-colors"
+                  href="https://twitter.com/solfarcaster"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors group"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.9 }}
+                  title="Follow us on X (Twitter)"
                 >
-                  <Twitter size={20} />
+                  <Twitter size={20} className="group-hover:text-white transition-colors" />
                 </motion.a>
                 <motion.a
-                  href="#"
-                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-violet-500 transition-colors"
+                  href="https://t.me/solfarcaster"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors group"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.9 }}
+                  title="Join our Telegram channel"
                 >
-                  <MessageCircle size={20} />
+                  <Send size={20} className="group-hover:text-white transition-colors" />
                 </motion.a>
                 <motion.a
-                  href="#"
-                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors"
+                  href="https://warpcast.com/~/channel/solfarcaster"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-500 transition-colors group"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.9 }}
+                  title="Join us on Farcaster"
                 >
-                  <Github size={20} />
+                  <MessageCircle size={20} className="group-hover:text-white transition-colors" />
                 </motion.a>
               </div>
             </div>
