@@ -34,14 +34,33 @@ app.use(passport.session());
 
 // API Routes
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'SOLFAR server is running' });
+  res.json({ 
+    status: 'ok', 
+    message: 'SOLFAR server is running',
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development'
+  });
 });
 
 app.get('/api/token-info', (req, res) => {
   res.json({
     name: 'SOLFAR',
     symbol: 'SOLFAR',
-    description: 'Bridge Solana to Farcaster - The eternal arch between ecosystems'
+    description: 'Bridge Solana to Farcaster - The eternal arch between ecosystems',
+    website: 'https://solfar.fun',
+    social: {
+      twitter: '@solfarcaster',
+      github: 'https://github.com/Abelhubprog/SOLFAR'
+    }
+  });
+});
+
+// Basic stats endpoint (mock data for now)
+app.get('/api/stats', (req, res) => {
+  res.json({
+    holders: 1337,
+    success: true,
+    message: 'SOLFAR community growing!'
   });
 });
 
@@ -56,22 +75,25 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   // Development mode - Vite handles static files
   app.get('/', (req, res) => {
-    res.json({ message: 'SOLFAR development server running. Use Vite dev server for frontend.' });
+    res.json({ 
+      message: 'SOLFAR development server running. Use Vite dev server for frontend.',
+      port: PORT,
+      endpoints: ['/api/health', '/api/token-info', '/api/stats']
+    });
   });
 }
 
 // WebSocket connection handling
 wss.on('connection', (ws) => {
-  console.log('WebSocket client connected');
+  console.log('🔗 WebSocket client connected');
   
   ws.on('message', (message) => {
-    console.log('Received:', message.toString());
-    // Echo back for now
-    ws.send(`Echo: ${message}`);
+    console.log('📨 Received:', message.toString());
+    ws.send(`🔄 Echo: ${message}`);
   });
   
   ws.on('close', () => {
-    console.log('WebSocket client disconnected');
+    console.log('❌ WebSocket client disconnected');
   });
 });
 
@@ -81,4 +103,6 @@ server.listen(PORT, () => {
   console.log(`🚀 SOLFAR server running on port ${PORT}`);
   console.log(`📱 WebSocket server ready`);
   console.log(`🌟 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🔗 API: http://localhost:${PORT}/api/health`);
+  console.log(`💰 SOLFAR - Bridge Solana to Farcaster!`);
 }); 
