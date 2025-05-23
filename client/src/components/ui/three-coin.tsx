@@ -1,32 +1,53 @@
-import { useRef, useState } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import * as THREE from "three";
 
-interface RotatingCoinProps {
-  isHovered: boolean;
+interface ThreeCoinProps {
+  className?: string;
 }
 
-export function RotatingCoin({ isHovered }: RotatingCoinProps) {
-  const meshRef = useRef<THREE.Mesh>(null);
-
-  useFrame((state, delta) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += delta * (isHovered ? 2 : 1);
-      meshRef.current.rotation.x = Math.PI / 2;
-    }
-  });
+export function ThreeCoin({ className }: ThreeCoinProps) {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <mesh ref={meshRef} rotation={[Math.PI / 2, 0, 0]}>
-      <cylinderGeometry args={[1, 1, 0.06, 64]} />
-      <meshStandardMaterial
-        color="#00FFA3"
-        emissive={isHovered ? "#B57AFF" : "#9945FF"}
-        emissiveIntensity={isHovered ? 1.8 : 1.2}
-        metalness={0.9}
-        roughness={isHovered ? 0.05 : 0.1}
-      />
-    </mesh>
+    <motion.div
+      className={`inline-block ${className}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      initial={{ scale: 1 }}
+      animate={{ scale: isHovered ? 1.2 : 1 }}
+      transition={{ duration: 0.2 }}
+      style={{
+        width: "60px",
+        height: "60px",
+        borderRadius: "50%",
+        background: "linear-gradient(45deg, #9945FF, #00FFA3)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        boxShadow: isHovered 
+          ? "0 0 30px rgba(153, 69, 255, 0.6)" 
+          : "0 0 15px rgba(153, 69, 255, 0.3)",
+        transition: "box-shadow 0.2s ease",
+      }}
+    >
+      <motion.div
+        animate={{ rotateY: isHovered ? 360 : 0 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        style={{
+          width: "40px",
+          height: "40px",
+          borderRadius: "50%",
+          background: "linear-gradient(45deg, #B57AFF, #00FFA3)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: "20px",
+          fontWeight: "bold",
+          color: "white",
+        }}
+      >
+        🪙
+      </motion.div>
+    </motion.div>
   );
 }
