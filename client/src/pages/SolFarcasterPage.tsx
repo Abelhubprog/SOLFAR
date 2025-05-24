@@ -312,7 +312,7 @@ export default function SolFarcasterPage() {
           <Button
             size="lg"
             className="btn-primary rounded-xl px-8 py-3 text-base md:text-lg font-semibold"
-            onClick={() => window.open('https://dexscreener.com/solana/4AVHBUF2gPSj32WrxitjvuUJFx2Xt27DegkYtWbvpump', '_blank')}
+            onClick={() => window.open('https://dexscreener.com/solana/CuJJTX4KpycSE4XcfTXt3o6WrSXiA8DtGjGppku4pump', '_blank')}
           >
             <motion.span
               whileHover={{ scale: 1.05, y: -2 }}
@@ -420,7 +420,7 @@ export default function SolFarcasterPage() {
                         <TrendingUp className="w-8 h-8 text-black" />
                       </motion.div>
                       <motion.a
-                        href="https://pump.fun/coin/4AVHBUF2gPSj32WrxitjvuUJFx2Xt27DegkYtWbvpump"
+                        href="https://pump.fun/coin/CuJJTX4KpycSE4XcfTXt3o6WrSXiA8DtGjGppku4pump"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center space-x-2 px-6 py-3 bg-teal-500 hover:bg-teal-400 rounded-lg text-black font-semibold transition-all mt-2"
@@ -451,7 +451,7 @@ export default function SolFarcasterPage() {
                         <BarChart3 className="w-8 h-8 text-white" />
                       </motion.div>
                       <motion.a
-                        href="https://dexscreener.com/solana/4AVHBUF2gPSj32WrxitjvuUJFx2Xt27DegkYtWbvpump"
+                        href="https://dexscreener.com/solana/CuJJTX4KpycSE4XcfTXt3o6WrSXiA8DtGjGppku4pump"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center space-x-2 px-6 py-3 bg-violet-500 hover:bg-violet-400 rounded-lg text-white font-semibold transition-all mt-2"
